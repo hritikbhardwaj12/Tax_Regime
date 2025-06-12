@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tax Regime</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="title">Tax Regime</div>
+        <a href="#login" class="login-link">Log In</a>
+    </header>
+
+    <div id="login" class="container">
+        <div class="form-container">
+            <h2>Log In</h2>
+            <p>Please enter your UserID and Password</p>
+            <form id="loginForm">
+                <label for="userId">UserID</label>
+                <input type="text" id="userId" name="userId" placeholder="Enter your UserID" required>
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Enter your Password" required>
+<!--
+                <div>
+                    <label for="keepLoggedIn">Keep me logged in</label>
+                    <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
+                    
+                </div>
+            -->
+            <div style="display: flex; align-items: center; gap: 1 px; margin-top: 10px;">
+                <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn" style="margin: 0;">
+                <label for="keepLoggedIn" style="margin: 0;">Keep me logged in</label>
+            </div>
+            
+            
+                <button type="submit">Log In</button>
+            </form>
+            <div class="links">
+                <a href="#forgot-password">Forgot Password?</a>
+                <a href="#signup">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="signup" class="container hidden">
+        <div class="form-container">
+            <h2>New User</h2>
+            <p>Password is required to have a minimum of 6 characters.</p>
+            <form id="signupForm">
+                <label for="signupUserId">User ID (Personnel No.)</label>
+                <input type="text" id="signupUserId" name="signupUserId" placeholder="Enter your User ID" required>
+
+                <label for="userName">User Name</label>
+                <input type="text" id="userName" name="userName" placeholder="Enter your Name" required>
+
+                <label for="email">E-mail</label>
+                <input type="email" id="email" name="email" placeholder="Enter your Email" required>
+
+                <label for="contactNo">Contact No.</label>
+                <input type="text" id="contactNo" name="contactNo" placeholder="Enter your Contact No." required>
+
+                <label for="signupPassword">Password</label>
+                <input type="password" id="signupPassword" name="signupPassword" placeholder="Enter your Password" required>
+
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your Password" required>
+
+                <button type="submit">Create User</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="forgot-password" class="container hidden">
+        <div class="form-container">
+            <h2>Forgot Password</h2>
+            <p>Please enter your registered Email or Contact No. to reset your password.</p>
+            <form id="forgotPasswordForm">
+                <label for="fpEmail">E-mail</label>
+                <input type="email" id="fpEmail" name="fpEmail" placeholder="Enter your Email">
+
+                <label for="fpContactNo">Contact No.</label>
+                <input type="text" id="fpContactNo" name="fpContactNo" placeholder="Enter your Contact No.">
+
+                <button type="submit">Reset Password</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

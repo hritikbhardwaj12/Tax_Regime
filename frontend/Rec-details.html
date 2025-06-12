@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Tax Regime</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background-color: #f0f0f0;
+    }
+
+    .topbar {
+      background-color: #000;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+    }
+
+    .topbar-left img {
+      height: 30px;
+      margin-right: 10px;
+    }
+
+    .topbar-title {
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .user-info {
+      font-size: 14px;
+    }
+
+    .user-info a {
+      color: red;
+      margin-left: 10px;
+      text-decoration: none;
+    }
+
+    .container {
+      background: white;
+      max-width: 850px;
+      margin: 20px auto;
+      padding: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .notice-bar {
+      background-color: #e6f4f9;
+      border: 1px solid #b5d9e8;
+      padding: 12px;
+      font-weight: bold;
+      color: #055a72;
+      margin-bottom: 20px;
+    }
+
+    .section-header {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: blue;
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group label {
+      width: 120px;
+      font-weight: bold;
+    }
+
+    .form-group input,
+    .form-group select {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .document-section {
+      background: #f2f2f2;
+      padding: 15px;
+      border: 1px solid #ccc;
+      margin-bottom: 20px;
+    }
+
+    .document-section label {
+      font-weight: bold;
+      margin-right: 10px;
+    }
+
+    .document-section button {
+      margin-right: 10px;
+      padding: 6px 10px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .info-line {
+      font-weight: bold;
+      margin: 20px 0 10px;
+    }
+
+    .switch-line {
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .checkboxes {
+      margin-bottom: 20px;
+    }
+
+    .checkboxes label {
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .submit-btn {
+      background-color: #28a745;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .submit-btn:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <img src="file.png" alt="Logo">
+      <div class="topbar-title">Tax Regime</div>
+    </div>
+    <div class="user-info">
+      Welcome <span id="username">User</span> | <a href="#">Log Out</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="notice-bar">
+      Tax Regime Switch option facility from default (New Tax Regime) to Old Tax Regime for Financial Year 2024–25
+    </div>
+
+    <div class="section-header">Record Details</div>
+
+    <form id="taxForm">
+      <div class="form-group">
+        <label for="pno">Pno:</label>
+        <input type="text" id="pno" name="pno" required>
+      </div>
+
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+      </div>
+
+      <div class="form-group">
+        <label for="level">Level:</label>
+        <input type="text" id="level" name="level" required>
+      </div>
+
+      <div class="document-section">
+        <label>Documents:</label>
+        <button type="button" onclick="openPDF('circular.pdf')">Circular</button>
+        <button type="button" onclick="openPDF('calculator.pdf')">Tax Calculator</button>
+      </div>
+
+      <div class="info-line">
+        You are currently under Income Tax default Option–I (New tax Regime).
+      </div>
+
+      <div class="switch-line">
+        Do you want to switch from option-I(New Tax Regime) to option-II(Old Tax Regime)?
+      </div>
+
+      <div class="form-group">
+        <label for="switch">Your Choice:</label>
+        <select id="switch" name="switch" required>
+          <option value="">--Select--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+      </div>
+
+      <div class="checkboxes">
+        <label><input type="checkbox" id="confirm1"> I have read the enclosed documents attached carefully before exercising the switching option.</label>
+        <label><input type="checkbox" id="confirm2"> I can switch only once in a Financial Year.</label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn" disabled>Submit</button>
+    </form>
+  </div>
+
+  <script>
+  // Load user data on page load
+  document.addEventListener("DOMContentLoaded", async () => {
+    // Check if user is logged in
+    try {
+      const response = await fetch("http://localhost:3001/api/auth/me", {
+        credentials: "include"
+      });
+
+      if (!response.ok) {
+        window.location.href = "index.html";
+        return;
+      }
+
+      const user = await response.json();
+      document.getElementById("username").textContent = user.name;
+      document.getElementById("pno").value = user.personnel_no;
+      document.getElementById("name").value = user.name;
+      document.getElementById("level").value = user.level || "Employee";
+
+      // Load current tax regime
+      const regimeResponse = await fetch("http://localhost:3001/api/tax/current", {
+        credentials: "include"
+      });
+
+      if (regimeResponse.ok) {
+        const regimeData = await regimeResponse.json();
+        if (regimeData.regime === "old") {
+          document.getElementById("switch").value = "yes";
+        }
+      }
+    } catch (error) {
+      console.error("Error loading user data:", error);
+      window.location.href = "index.html";
+    }
+
+    // Checkbox validation
+    const checkbox1 = document.getElementById("confirm1");
+    const checkbox2 = document.getElementById("confirm2");
+    const submitBtn = document.getElementById("submitBtn");
+
+    function validateCheckboxes() {
+      submitBtn.disabled = !(checkbox1.checked && checkbox2.checked);
+    }
+
+    checkbox1.addEventListener("change", validateCheckboxes);
+    checkbox2.addEventListener("change", validateCheckboxes);
+
+    // Form submission
+    document.getElementById("taxForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+
+      const switchValue = document.getElementById("switch").value;
+      if (switchValue !== "yes" && switchValue !== "no") {
+        alert("Please select your choice");
+        return;
+      }
+
+      const regime = switchValue === "yes" ? "old" : "new";
+
+      try {
+        const response = await fetch("http://localhost:3001/api/tax/switch", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ regime }),
+          credentials: "include"
+        });
+
+        const data = await response.json();
+        if (response.ok) {
+          alert("Tax regime updated successfully!");
+        } else {
+          alert(data.error || "Failed to update tax regime");
+        }
+      } catch (error) {
+        console.error("Error updating tax regime:", error);
+        alert("Failed to update tax regime due to server error");
+      }
+    });
+  });
+
+  // Logout functionality
+  document.querySelector(".user-info a").addEventListener("click", async (e) => {
+    e.preventDefault();
+    try {
+      await fetch("http://localhost:3001/api/auth/logout", {
+        method: "POST",
+        credentials: "include"
+      });
+      localStorage.removeItem("loggedInUser");
+      window.location.href = "index.html";
+    } catch (error) {
+      console.error("Logout error:", error);
+    }
+  });
+
+  function openPDF(fileName) {
+    window.open(fileName, "_blank");
+  }  </script>
+
+</body>
+</html>
