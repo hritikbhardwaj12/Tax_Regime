@@ -8,32 +8,28 @@
 </head>
 <body>
     <header>
-        <div class="title">Tax Regime</div>
-        <a href="#login" class="login-link">Log In</a>
-    </header>
+  <div class="title">
+    <img src="image/tata.webp" alt="Tata Logo" class="logo">
+    Tax Regime
+  </div>
+  <a href="#login" class="login-link">Log In</a>
+</header>
 
-    <div id="login" class="container">
+
+
+
+    <div id="login" class="container">  
         <div class="form-container">
+            <img src="image/tata.webp" alt="Tata Banner" class="banner-image">
             <h2>Log In</h2>
+            
             <p>Please enter your UserID and Password</p>
             <form id="loginForm">
-                <label for="userId">UserID</label>
+                <label for="userId">Aadhar no.</label>
                 <input type="text" id="userId" name="userId" placeholder="Enter your UserID" required>
 
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Enter your Password" required>
-<!--
-                <div>
-                    <label for="keepLoggedIn">Keep me logged in</label>
-                    <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
-                    
-                </div>
-            -->
-            <div style="display: flex; align-items: center; gap: 1 px; margin-top: 10px;">
-                <input type="checkbox" id="keepLoggedIn" name="keepLoggedIn" style="margin: 0;">
-                <label for="keepLoggedIn" style="margin: 0;">Keep me logged in</label>
-            </div>
-            
             
                 <button type="submit">Log In</button>
             </form>
@@ -49,7 +45,7 @@
             <h2>New User</h2>
             <p>Password is required to have a minimum of 6 characters.</p>
             <form id="signupForm">
-                <label for="signupUserId">User ID (Personnel No.)</label>
+                <label for="signupUserId">User ID (Aadhar No.)</label>
                 <input type="text" id="signupUserId" name="signupUserId" placeholder="Enter your User ID" required>
 
                 <label for="userName">User Name</label>

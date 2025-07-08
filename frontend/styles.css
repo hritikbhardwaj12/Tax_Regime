@@ -4,10 +4,18 @@ body {
   padding: 0;
   background-color: #f5f5f5;
 }
+.banner-image {
+  display: block;
+  max-width: 50%;
+  height: auto;
+  margin: 1rem auto;
+  border-radius: 8px;
+}
+
 
 header {
-  background-color: #1c1c1c;
-  color: #ffffff;
+  background-color: #ffffff;
+  color: #4da5d1;
   padding: 1rem;
   display: flex;
   justify-content: space-between;
@@ -20,10 +28,16 @@ header {
 }
 
 .login-link {
-  color: #ffffff;
+  color: #4da5d1;
   text-decoration: none;
   font-size: 1rem;
 }
+.logo {
+  height: 30px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 
 .container {
   max-width: 400px;
@@ -63,7 +77,7 @@ input {
 button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #28a745;
+  background-color: #4da5d1;
   color: #ffffff;
   border: none;
   border-radius: 4px;
@@ -72,7 +86,7 @@ button {
 }
 
 button:hover {
-  background-color: #218838;
+  background-color: #3e4fd4;
 }
 
 .links {
